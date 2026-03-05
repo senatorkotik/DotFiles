@@ -40,7 +40,7 @@ static const Rule rules[] = {
 	/* app_id             title       tags mask     isfloating   alpha unfocus      monitor */
  	/* examples: */
 	{ "Gimp_EXAMPLE",     NULL,       0,            1,           default_opacity_unfocus, -1 }, /* Start on currently visible tags floating, not tiled */
-	{ "firefox",  NULL,       1 << 8,       0,           1.00,                    -1 }, /* Start on ONLY tag "9" */
+	{ "librewolf",  NULL,       0,       0,           1.00,                    -1 }, /* Start on ONLY tag "9" */
 };
 
 /* layout(s) */
@@ -134,7 +134,6 @@ static const enum libinput_config_tap_button_map button_map = LIBINPUT_CONFIG_TA
 /* commands */
 static const char *termcmd[] = { "foot", NULL };
 static const char *menucmd[] = { "wmenu-run", NULL };
-static const char *changekeyboard[] = { "foot", NULL};
 
 static const Key keys[] = {
 	/* Note that Shift changes certain key codes: 2 -> at, etc. */

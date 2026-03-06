@@ -33,6 +33,8 @@ static const char *const autostart[] = {
         "swaybg", "-i", "/home/DesertFox/.config/wallpapers/1.png", "-m", "fill", NULL,
 	"dwlb", NULL,
 	"zsh", "-c", "someblocks -p | dwlb -status-stdin all", NULL,
+	"zsh", "-c", "/usr/lib/xdg-desktop-portal", NULL,
+	"zsh", "-c", "/usr/lib/xdg-desktop-portal-wlr", NULL,
 	NULL /* terminate */
 };
 
@@ -138,7 +140,6 @@ static const char *menucmd[] = { "wmenu-run", NULL };
 static const Key keys[] = {
 	/* Note that Shift changes certain key codes: 2 -> at, etc. */
 	/* modifier                  key                  function          argument */
-	{ 0,             XKB_KEY_ISO_Next_Group,          spawn,         {.v = changekeyboard} },
 	{ MODKEY|WLR_MODIFIER_SHIFT|WLR_MODIFIER_CTRL, XKB_KEY_M,        restartdwl,     {0} },
 	{ MODKEY,                    XKB_KEY_p,           spawn,            {.v = menucmd} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_Return,      spawn,            {.v = termcmd} },

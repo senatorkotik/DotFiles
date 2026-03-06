@@ -1,0 +1,39 @@
+#!/bin/sh
+
+#Environment
+export GTK_THEME=Adwaita:dark
+export GTK2_RC_FILES=/usr/share/themes/Adwaita-dark/gtk-2.0/gtkrc
+export QT_STYLE_OVERRIDE=Adwaita-Dark
+
+export XDG_SESSION_TYPE=wayland
+export XDG_CURRENT_DESKTOP=sway 
+export MOZ_ENABLE_WAYLAND=1    
+export QT_QPA_PLATFORM=wayland  
+export SDL_VIDEODRIVER=wayland   
+
+#export WAYLAND_DISPLAY=wayland-0
+
+if [ -z "$DBUS_SESSION_BUS_ADDRESS" ]; then
+    export DBUS_SESSION_BUS_ADDRESS=$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$(pgrep -n dwl)/environ | cut -d= -f2-)
+fi
+
+if ! pgrep -x "pipewire" > /dev/null; then
+    pipewire &
+fi
+
+if ! pgrep -x "pipewire-pulse" > /dev/null; then
+    pipewire-pulse &
+fi
+
+if ! pgrep -x "wireplumber" > /dev/null; then
+    wireplumber &
+fi
+
+#someblocks -p & | dwlb -status-stdin all &
+
+do=true
+while $do || [ -f /tmp/restart_dwl ]; do
+	do=false
+	rm -rf /tmp/restart_dwl > /dev/null 2>&1
+	exec dbus-launch --exit-with-session dwl
+done
